@@ -1,3 +1,3 @@
 #! /bin/sh
-echo | ip addr | grep 'inet' 
+ip addr | grep 'inet' 
 echo test
