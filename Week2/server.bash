@@ -4,22 +4,22 @@
 if [[ -f "wg0.conf" ]]
 then
   # Prompt if we need to overwrite the file
-  echo "The file wg0.conf already exists."
-  echo -n "Do you want to overwrite it? [y|N]"
-  read to_overwrite
+	echo "The file wg0.conf already exists."
+	echo -n "Do you want to overwrite it? [y|N]"
+	read to_overwrite
 
-  if [[ "${to_overwrite}" == "N" || "${to_overwrite}" == "" || "${to_overwrite}" == "n" ]]
-  then 
-    echo "Exiting..."
-    exit 0
-  elif [[ "${to_overwrite}" == "y" ]]
-  then
-    echo "Creating the wireguard configuration file..."
+	if [[ "${to_overwrite}" == "N" || "${to_overwrite}" == "" || "${to_overwrite}" == "n" ]]
+	then 
+		echo "Exiting..."
+		exit 0
+	elif [[ "${to_overwrite}" == "y" ]]
+	then
+		echo "Creating the wireguard configuration file..."
     # If they don't specify y/N then error
-  else 
-    echo "Invalid value"
-    exit 1
-  fi
+	else 
+		echo "Invalid value"
+		exit 1
+	fi
 fi
 
 # Storyline: Script to create a wireguard server
