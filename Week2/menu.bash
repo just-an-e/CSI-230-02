@@ -75,11 +75,45 @@ function admin_menu() {
 admin_menu
 }
 
+function security_menu() {
+	clear
+	echo "[O]pen Network Sockets"
+	echo "[U]ID"
+	echo "[C]heck the last 10 logged in users"
+	echo "[L]ogged in users"
+	echo "[B]ack to main menu"
+	echo "[E]xit"
+	read -p "Please enter a choice above:" choice
+	case "$choice" in
+		O|o) netstat -l |less
+		;;
+		U|u) cat /etc/passwd | grep "x:0" | less
+		;;
+		C|c) last -n 10 | less
+		;;
+		L|l) who | less
+		;;
+		E|e) exit 0
+		;;
+		B|b) menu
+		;;
+		*)
+			invalid_opt
+		;;
+
+	esac
+
+
+security_menu
+}
+
 function vpn_menu() {
 
 	clear
 	echo "[A]dd a peer"
 	echo "[D]elete a peer"
+	echo "[C]heck if a user exists"
+	echo "[B]ack to admin menu"
 	echo "[B]ack to admin menu"
 	echo "[M]ain menu"
 	echo "[E]xit"
@@ -93,8 +127,15 @@ function vpn_menu() {
 
 	;;
 	D|d) # Create a prompt for the user
-		#Call the manage-user.bash and pass the roper switches and argument to delete the user
-	
+		read -p "Please specify a user" user
+		# Call the manage-users.bash and pass the proper switches and arguement
+		bash manage-users.bash -d -u "$user"
+		#  to delete the user
+	;;
+	C|c) #check if a user exists
+		read -p "Which user would you like to check for?" user
+		bash manage-users.bash -c -u ${user}
+		read -p "Press any button to proceed:" response
 	;;
 	B|b) admin_menu
 	;;
