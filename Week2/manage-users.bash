@@ -69,4 +69,14 @@ then
 	bash peer.bash ${t_user}
 fi
 
-#Check to see if a user exits
+# Check to see if a user exists
+if [[ ${u_check}  ]]
+then
+	result=$(cat wg0.conf | grep ${t_user})
+	if [[ ${result} != ""  ]]
+	then
+		echo "The user ${t_user} exists."
+	else
+		echo "The user ${t_user} does not exist."
+	fi
+fi
