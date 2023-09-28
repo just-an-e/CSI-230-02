@@ -13,14 +13,16 @@ while getopts 'hdau:' OPTION ; do
 		u) t_user=${OPTARG}
 		;;
 		h)
-
+			# This is our help line of code, it tells the user how to use the command.
+			# $(basename $0) will return the name of the bash script.
 			echo ""
-			echo "Usage : $(basename $0) [-a]|[-d] -u username"
+			echo "Usage: $(basename $0) [-a]|[-d] -u username"
 			echo ""
 			exit 1
 
 		;;
-
+		c) u_check=${OPTION}
+		;;
 		*)
 		
 			echo "Invalid value."
@@ -32,23 +34,18 @@ while getopts 'hdau:' OPTION ; do
 
 done
 
-#Check to see if the -a and -d are empty or if they are both specified throw an error. 
-
-if [[ (${u_del} == "" && ${u_add} == "") || (${u_del} != "" && ${u_add} != "") ]]
-then 
-
+# Check to see if -a and -d and -u are empty, or if a and d are both  specified, throw an error
+if [[ (${u_del} == "" && ${u_add} == "" && ${u_check} == "") || (${u_del} != "" && ${u_add} != "")  ]]
+then
 	echo "Please specify -a or -d and the -u and username."
-
 fi
 
 # Check to ensure -u is specified
-if [[ (${u_del} != "" || ${u_add} != "") && ${t_user} == "" ]]
-then 
-
-	echo "Please specify a user (-u)!"
-	echo "Usage: $(basename $0) [-a][-d] -u username"
+if [[ (${u_del} != "" || ${u_add} != "" || ${u_check} != "") && ${t_user} == ""  ]]
+then
+	echo "Please specify a user (-u)."
+	echo "Usage: $(basename $0) [-a]|[-d] [-u username]"
 	exit 1
-
 fi
 
 # Delete a user
