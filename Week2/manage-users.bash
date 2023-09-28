@@ -2,10 +2,10 @@
 
 # Storyline: Script to add and delete VPN peers
 
-while getopts 'hdau:' OPTION ; do
+while getopts 'hdau:c' OPTION ; do
 
 	case "$OPTION" in
-	
+
 		d) u_del=${OPTION}
 		;;
 		a) u_add=${OPTION}
@@ -19,19 +19,14 @@ while getopts 'hdau:' OPTION ; do
 			echo "Usage: $(basename $0) [-a]|[-d] -u username"
 			echo ""
 			exit 1
-
 		;;
 		c) u_check=${OPTION}
 		;;
 		*)
-		
 			echo "Invalid value."
 			exit 1
-
 		;;
-
 	esac
-
 done
 
 # Check to see if -a and -d and -u are empty, or if a and d are both  specified, throw an error
@@ -51,18 +46,14 @@ fi
 # Delete a user
 if [[ ${u_del} ]]
 then
-
 	echo "Deleting user..."
 	sed -i "/# ${t_user} begin/,/# ${t_user} end/d" wg0.conf
-
 fi
 
-# Add a user 
-
+# Add a user
 if [[ ${u_add} ]]
-
 then
-	echo "Create the User..."
+	echo "Creating the User..."
 	bash peer.bash ${t_user}
 fi
 
