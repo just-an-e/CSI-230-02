@@ -114,7 +114,6 @@ function vpn_menu() {
 	echo "[D]elete a peer"
 	echo "[C]heck if a user exists"
 	echo "[B]ack to admin menu"
-	echo "[B]ack to admin menu"
 	echo "[M]ain menu"
 	echo "[E]xit"
 	read -p "Please select an option: " choice
