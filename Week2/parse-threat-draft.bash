@@ -34,48 +34,55 @@ while getopts 'icwmp' OPTION ; do
 
   case "$OPTION" in
     i)
-    	for eachIP in $(cat badIPs.txt)
+    	for eachip in $(cat badips.txt)
 	do
-  		echo "block in from ${eachIP} to any" | tee -a pf.conf
-	
- 		echo "iptables -A INPUT -s ${eachIP} -j DROP" | tee -a badIPS.iptables
-
+		echo "iptables -a input -s ${eachip} -j drop" | tee -a  badips.iptables
 	done
+	clear
+	echo "Created IPTables firewall drop rules in file \"badips.iptables\""
+	
   	exit 0
 
     ;;
     c)
-	for eachIP in $(cat badIPs.txt)
- 	do
-  		echo "deny ip host ${eachip} any" | tee -a badips.cisco
-	
- 		echo "iptables -A INPUT -s ${eachIP} -j DROP" | tee -a badIPS.cisco
-
+	egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.0' badips.txt | tee badips.nocidr
+	for eachip in $(cat badips.nocidr)
+	do
+		echo "deny ip host ${eachip} any" | tee -a badips.cisco
 	done
+	rm badips.nocidr
+	clear
+	echo 'Created IP Tables for firewall drop rules in file "badips.cisco"'
  	exit 0
     ;;
     w)
-	for eachIP in $(cat badIPs.txt)
- 	do
-  		echo "netsh advfirewall firewall add rule name=\"BLOCK IP ADDRESS - ${eachip}\" dir=in action=block remoteip=${eachip}" | tee -a badips.netsh
-    		
-     	done
+	egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.0' badips.txt | tee badips.windowsform
+	for eachip in $(cat badips.windowsform)
+	do
+		echo "netsh advfirewall firewall add rule name=\"BLOCK IP ADDRESS - ${eachip}\" dir=in action=block remoteip=${eachip}" | tee -a badips.netsh
+	done
+	rm badips.windowsform
+	clear
+	echo "Created IPTables for firewall drop rules in file \"badips.netsh\""
  	exit 0
     ;;
     m)
-    	for eachIP in $(cat badIPs.txt)
- 	do
+    	echo '
+	scrub-anchor "com.apple/*"
+	nat-anchor "com.apple/*"
+	rdr-anchor "com.apple/*"
+	dummynet-anchor "com.apple/*"
+	anchor "com.apple/*"
+	load anchor "com.apple" from "/etc/pf.anchors/com.apple"
 
-  		echo '
-		scrub-anchor "com.apple/*"
-		nat-anchor "com.apple/*"
-		rdr-anchor "com.apple/*"
-		dummynet-anchor "com.apple/*"
-		anchor "com.apple/*"
-		load anchor "com.apple" from "/etc/pf.anchors/com.apple" 
-  
-  		' | tee pf.conf
-    	done
+	' | tee pf.conf
+
+	for eachip in $(cat badips.txt)
+	do
+		echo "block in from ${eachip} to any" | tee -a pf.conf
+	done
+	clear
+	echo "Created IP tables for firewall drop rules in file \"pf.conf\""
  	exit 0
     ;;
     p)
