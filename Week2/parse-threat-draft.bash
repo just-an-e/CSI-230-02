@@ -34,33 +34,53 @@ while getopts 'icwmp' OPTION ; do
 
   case "$OPTION" in
     i)
+    	for eachIP in $(cat badIPs.txt)
+	do
+  		echo "block in from ${eachIP} to any" | tee -a pf.conf
+	
+ 		echo "iptables -A INPUT -s ${eachIP} -j DROP" | tee -a badIPS.iptables
+
+	done
+  	exit 0
+
     ;;
     c)
+	for eachIP in $(cat badIPs.txt)
+ 	do
+  		echo "deny ip host ${eachip} any" | tee -a badips.cisco
+	
+ 		echo "iptables -A INPUT -s ${eachIP} -j DROP" | tee -a badIPS.cisco
+
+	done
+ 	exit 0
     ;;
     w)
+	for eachIP in $(cat badIPs.txt)
+ 	do
+  		echo "netsh advfirewall firewall add rule name=\"BLOCK IP ADDRESS - ${eachip}\" dir=in action=block remoteip=${eachip}" | tee -a badips.netsh
+    		
+     	done
+ 	exit 0
     ;;
     m)
+    	for eachIP in $(cat badIPs.txt)
+ 	do
+
+  		echo '
+		scrub-anchor "com.apple/*"
+		nat-anchor "com.apple/*"
+		rdr-anchor "com.apple/*"
+		dummynet-anchor "com.apple/*"
+		anchor "com.apple/*"
+		load anchor "com.apple" from "/etc/pf.anchors/com.apple" 
+  
+  		' | tee pf.conf
+    	done
+ 	exit 0
     ;;
     p)
+    	
     ;;
-
-echo ' 
-
-for eachIP in $(cat badIPs.txt)
-do
-
-  echo '
-	scrub-anchor "com.apple/*"
-	nat-anchor "com.apple/*"
-	rdr-anchor "com.apple/*"
-	dummynet-anchor "com.apple/*"
-	anchor "com.apple/*"
-	load anchor "com.apple" from "/etc/pf.anchors/com.apple" 
-  
-  ' | tee pf.conf
-  
-  echo "block in from ${eachIP} to any" | tee -a pf.conf
-
-  echo "iptables -A INPUT -s ${eachIP} -j DROP" | tee -a badIPS.iptables
-
+    
 done
+
