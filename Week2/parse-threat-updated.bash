@@ -38,8 +38,6 @@ while getopts 'icwmp' OPTION ; do
 		;;
 		c) cisco=${OPTION}
 		;;
-		n) netscreen=${OPTION}
-		;;
 		f) wfirewall=${OPTION}
 		;;
 		m) macOS=${OPTION}
@@ -76,8 +74,6 @@ then
 	clear
 	echo 'Created IP Tables for firewall drop rules in file "badips.cisco"'
 fi
-
-# Netscreen
 
 # Windows Firewall
 if [[ ${wfirewall} ]]
