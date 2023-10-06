@@ -38,7 +38,7 @@ while getopts 'icwmp' OPTION ; do
 		;;
 		c) cisco=${OPTION}
 		;;
-		f) wfirewall=${OPTION}
+		w) wfirewall=${OPTION}
 		;;
 		m) macOS=${OPTION}
 		;;
