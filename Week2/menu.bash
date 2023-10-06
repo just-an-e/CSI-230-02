@@ -116,8 +116,8 @@ vpn_menu
 
 function security_menu() {
 	clear
-	echo "[O]pen Network Sockets"
-	echo "[U]ID"
+	echo "[I]Ptables"
+	echo "[C]isco"
 	echo "[C]heck the last 10 logged in users"
 	echo "[L]ogged in users"
 	echo "[B]ack to main menu"
