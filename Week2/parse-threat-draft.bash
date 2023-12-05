@@ -19,9 +19,9 @@ egrep [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1-3}\.0/[0-9]{1-2} /tmp/emerging-drop.surica
       echo "Invalid value."
       exit 1
     ;;
+    esac
 
 else
-
 echo "Creating badIPs.txt"
 
 wget https://rules.emergingthreats.net/blockrules/emerging-drop.suricata.rules -O /tmp/emerging-drop.suricata.rules
@@ -29,6 +29,7 @@ wget https://rules.emergingthreats.net/blockrules/emerging-drop.suricata.rules -
 egrep [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1-3}\.0/[0-9]{1-2} /tmp/emerging-drop.suricata.rules | sort -u | tee badIPs.txt
 
 fi
+
 
 while getopts 'icwmp' OPTION ; do
 
@@ -88,6 +89,7 @@ while getopts 'icwmp' OPTION ; do
     p)
     	
     ;;
+    esac
     
 done
 

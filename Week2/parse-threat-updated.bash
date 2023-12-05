@@ -30,7 +30,7 @@ egrep [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1-3}\.0/[0-9]{1-2} /tmp/emerging-drop.surica
 
 fi
 
-
+# Switches for IPTables (I), Cisco (C), Windows Firewall (W), and Mac OS X (M). Also Parse TargetedThreats file (P)
 while getopts 'icwmp' OPTION ; do
 
   case "$OPTION" in
@@ -87,7 +87,15 @@ while getopts 'icwmp' OPTION ; do
  	exit 0
     ;;
     p)
-    	
+    	wget https://raw.githubusercontent.com/botherder/targetedthreats/master/targetedthreats.csv -O /tmp/targetedthreats.csv
+	awk '/domain/ {print}' /tmp/targetedthreats.csv | awk -F \" '{print $4}' | sort -u > threats.txt
+	echo 'class-map match-any BAD_URLS' | tee ciscothreats.txt
+	for eachip in $(cat threats.txt)
+	do
+		echo "match protocol http host \"${eachip}\"" | tee -a ciscothreats.txt
+	done
+	rm threats.txt
+	echo 'Cisco URL filters file successfully parsed and created at "ciscothreats.txt"'
     ;;
     esac
     
