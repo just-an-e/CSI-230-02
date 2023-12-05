@@ -34,18 +34,37 @@ fi
 while getopts 'icwmp' OPTION ; do
 
   case "$OPTION" in
-    i)
-    	for eachip in $(cat badips.txt)
+   		i) iptables=${OPTION}
+		;;
+		c) cisco=${OPTION}
+		;;
+		w) wfirewall=${OPTION}
+		;;
+		m) macOS=${OPTION}
+		;;
+		p) parseCisco=${OPTION}
+		;;
+		*) 
+			echo "Invalid Value"
+			exit 1
+		;;
+    esac
+    
+done
+
+if [[ ${iptables}  ]]
+then
+	for eachip in $(cat badips.txt)
 	do
 		echo "iptables -a input -s ${eachip} -j drop" | tee -a  badips.iptables
 	done
 	clear
 	echo "Created IPTables firewall drop rules in file \"badips.iptables\""
-	
-  	exit 0
+fi
 
-    ;;
-    c)
+# Cisco
+if [[ ${cisco} ]]
+then
 	egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.0' badips.txt | tee badips.nocidr
 	for eachip in $(cat badips.nocidr)
 	do
@@ -54,9 +73,11 @@ while getopts 'icwmp' OPTION ; do
 	rm badips.nocidr
 	clear
 	echo 'Created IP Tables for firewall drop rules in file "badips.cisco"'
- 	exit 0
-    ;;
-    w)
+fi
+
+# Windows Firewall
+if [[ ${wfirewall} ]]
+then
 	egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.0' badips.txt | tee badips.windowsform
 	for eachip in $(cat badips.windowsform)
 	do
@@ -65,10 +86,12 @@ while getopts 'icwmp' OPTION ; do
 	rm badips.windowsform
 	clear
 	echo "Created IPTables for firewall drop rules in file \"badips.netsh\""
- 	exit 0
-    ;;
-    m)
-    	echo '
+fi
+
+# MacOS
+if [[ ${macOS} ]]
+then
+	echo '
 	scrub-anchor "com.apple/*"
 	nat-anchor "com.apple/*"
 	rdr-anchor "com.apple/*"
@@ -84,6 +107,7 @@ while getopts 'icwmp' OPTION ; do
 	done
 	clear
 	echo "Created IP tables for firewall drop rules in file \"pf.conf\""
+<<<<<<< HEAD
  	exit 0
     ;;
     p)
@@ -100,4 +124,20 @@ while getopts 'icwmp' OPTION ; do
     esac
     
 done
+=======
+fi
+>>>>>>> cb582bd9e9197c7295b66281e8d259e482a69ff2
 
+# Parse Cisco
+if [[ ${parseCisco} ]]
+then
+	wget https://raw.githubusercontent.com/botherder/targetedthreats/master/targetedthreats.csv -O /tmp/targetedthreats.csv
+	awk '/domain/ {print}' /tmp/targetedthreats.csv | awk -F \" '{print $4}' | sort -u > threats.txt
+	echo 'class-map match-any BAD_URLS' | tee ciscothreats.txt
+	for eachip in $(cat threats.txt)
+	do
+		echo "match protocol http host \"${eachip}\"" | tee -a ciscothreats.txt
+	done
+	rm threats.txt
+	echo 'Cisco URL filters file successfully parsed and created at "ciscothreats.txt"'
+fi

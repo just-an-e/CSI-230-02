@@ -116,8 +116,8 @@ vpn_menu
 
 function security_menu() {
 	clear
-	echo "[O]pen Network Sockets"
-	echo "[U]ID"
+	echo "[I]Ptables"
+	echo "[C]isco"
 	echo "[C]heck the last 10 logged in users"
 	echo "[L]ogged in users"
 	echo "[B]ack to main menu"
@@ -145,5 +145,36 @@ function security_menu() {
 
 security_menu
 }
+
+function block_list_menu {
+	clear
+ 	echo "[O]pen Network Sockets"
+	echo "[U]ID"
+	echo "[]heck the last 10 logged in users"
+	echo "[W]ogged in users"
+	echo "[B]ack to main menu"
+	echo "[E]xit"
+	read -p "Please enter a choice above:" choice
+	case "$choice" in
+		O|o) netstat -l |less
+		;;
+		U|u) cat /etc/passwd | grep "x:0" | less
+		;;
+		C|c) last -n 10 | less
+		;;
+		L|l) who | less
+		;;
+		E|e) exit 0
+		;;
+		B|b) menu
+		;;
+		*)
+			invalid_opt
+		;;
+
+	esac
+ 	block_list_menu
+}
+
 # Call the main function
 menu
