@@ -107,26 +107,8 @@ then
 	done
 	clear
 	echo "Created IP tables for firewall drop rules in file \"pf.conf\""
-<<<<<<< HEAD
- 	exit 0
-    ;;
-    p)
-    	wget https://raw.githubusercontent.com/botherder/targetedthreats/master/targetedthreats.csv -O /tmp/targetedthreats.csv
-	awk '/domain/ {print}' /tmp/targetedthreats.csv | awk -F \" '{print $4}' | sort -u > threats.txt
-	echo 'class-map match-any BAD_URLS' | tee ciscothreats.txt
-	for eachip in $(cat threats.txt)
-	do
-		echo "match protocol http host \"${eachip}\"" | tee -a ciscothreats.txt
-	done
-	rm threats.txt
-	echo 'Cisco URL filters file successfully parsed and created at "ciscothreats.txt"'
-    ;;
-    esac
-    
-done
-=======
+
 fi
->>>>>>> cb582bd9e9197c7295b66281e8d259e482a69ff2
 
 # Parse Cisco
 if [[ ${parseCisco} ]]

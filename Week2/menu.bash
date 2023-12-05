@@ -18,7 +18,8 @@ function menu () {
 	clear
 	echo "[1] Admin Menu"
 	echo "[2] Security Menu"
-	echo "[3] Exit"
+	echo "[3] Block List Menu"
+	echo "[4] Exit"
 	read -p "Please enter a choice above: " choice
 
 	case "$choice" in 
@@ -28,7 +29,10 @@ function menu () {
 		2) security_menu
 		;;
 		
-		3) exit 0
+		3) block_list_menu
+		;;
+		
+		4) exit 0
 		;;
 		
 		*)
@@ -116,8 +120,6 @@ vpn_menu
 
 function security_menu() {
 	clear
-	echo "[I]Ptables"
-	echo "[C]isco"
 	echo "[C]heck the last 10 logged in users"
 	echo "[L]ogged in users"
 	echo "[B]ack to main menu"
@@ -148,25 +150,28 @@ security_menu
 
 function block_list_menu {
 	clear
- 	echo "[O]pen Network Sockets"
-	echo "[U]ID"
-	echo "[]heck the last 10 logged in users"
-	echo "[W]ogged in users"
+	echo "[I]PTables"
+	echo "[C]isco"
+	echo "[W]indows Firewall"
+	echo "[M]ac OS"
+	echo "[P]arse Cisco"
 	echo "[B]ack to main menu"
 	echo "[E]xit"
 	read -p "Please enter a choice above:" choice
 	case "$choice" in
-		O|o) netstat -l |less
-		;;
-		U|u) cat /etc/passwd | grep "x:0" | less
-		;;
-		C|c) last -n 10 | less
-		;;
-		L|l) who | less
-		;;
 		E|e) exit 0
 		;;
 		B|b) menu
+		;;
+		I|i) bash parse-threat-updated.bash -i
+		;;
+		C|c) bash parse-threat-updated.bash -c
+		;;
+		W|w) bash parse-threat-updated.bash -w
+		;;
+		M|m) bash parse-threat-updated.bash -m
+		;;
+		P|p) bash parse-threat-updated.bash -p
 		;;
 		*)
 			invalid_opt
