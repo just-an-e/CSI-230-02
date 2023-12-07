@@ -1,0 +1,109 @@
+"Name","Path"
+"chrome","C:\Program Files\Google\Chrome\Application\chrome.exe"
+"chrome","C:\Program Files\Google\Chrome\Application\chrome.exe"
+"chrome","C:\Program Files\Google\Chrome\Application\chrome.exe"
+"chrome","C:\Program Files\Google\Chrome\Application\chrome.exe"
+"chrome","C:\Program Files\Google\Chrome\Application\chrome.exe"
+"chrome","C:\Program Files\Google\Chrome\Application\chrome.exe"
+"chrome","C:\Program Files\Google\Chrome\Application\chrome.exe"
+"chrome","C:\Program Files\Google\Chrome\Application\chrome.exe"
+"chrome","C:\Program Files\Google\Chrome\Application\chrome.exe"
+"chrome","C:\Program Files\Google\Chrome\Application\chrome.exe"
+"chrome","C:\Program Files\Google\Chrome\Application\chrome.exe"
+"chrome","C:\Program Files\Google\Chrome\Application\chrome.exe"
+"chrome","C:\Program Files\Google\Chrome\Application\chrome.exe"
+"csrss",
+"csrss",
+"ctfmon",
+"dllhost",
+"dllhost","C:\Windows\system32\DllHost.exe"
+"dwm",
+"explorer","C:\Windows\Explorer.EXE"
+"fontdrvhost",
+"fontdrvhost",
+"GoogleCrashHandler",
+"GoogleCrashHandler64",
+"Idle",
+"lsass",
+"Memory Compression",
+"msdtc",
+"MsMpEng",
+"NisSrv",
+"notepad","C:\Windows\System32\notepad.exe"
+"powershell_ise","C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell_ISE.exe"
+"Registry",
+"RuntimeBroker","C:\Windows\System32\RuntimeBroker.exe"
+"RuntimeBroker","C:\Windows\System32\RuntimeBroker.exe"
+"RuntimeBroker","C:\Windows\System32\RuntimeBroker.exe"
+"SearchUI","C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\SearchUI.exe"
+"SecurityHealthService",
+"SecurityHealthSystray","C:\Windows\System32\SecurityHealthSystray.exe"
+"services",
+"SgrmBroker",
+"ShellExperienceHost","C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe"
+"sihost","C:\Windows\system32\sihost.exe"
+"smss",
+"spoolsv",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost","C:\Windows\system32\svchost.exe"
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost","C:\Windows\system32\svchost.exe"
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost","C:\Windows\system32\svchost.exe"
+"svchost","C:\Windows\system32\svchost.exe"
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"svchost",
+"System",
+"taskhostw","C:\Windows\system32\taskhostw.exe"
+"TiWorker",
+"TrustedInstaller",
+"VGAuthService",
+"vm3dservice",
+"vm3dservice",
+"vmtoolsd",
+"vmtoolsd","C:\Program Files\VMware\VMware Tools\vmtoolsd.exe"
+"WindowsInternal.ComposableShell.Experiences.TextInput.InputApp","C:\Windows\SystemApps\InputApp_cw5n1h2txyewy\WindowsInternal.ComposableShell.Experiences.TextInput.InputApp.exe"
+"wininit",
+"winlogon",
+"WmiPrvSE",
