@@ -1,0 +1,11 @@
+1. what has been your experience learning bash?
+Terrible. I simply do not like the command line or anything sysadmin related. 
+
+2. What would have made the experience with learning it better, if there were problems with it, my instructions, or the assignments?
+If the class wasn't merged with Scripting & Automation I feel like my experience would be a lot better because I didn't sign up for a 300 class with three prerequisites I HAVEN'T TAKEN. I signed up for a 200 level course with one prerequisite. The videos suck to learn from in my opinion. They're sloppy because half the time the instructor in the video makes mistakes that you have to fix while watching the video. It also incorporates the starting code into the video which is really annoying. I want separate documentation for what I'm supposed to be learning and what I'm supposed to be doing. The descriptions for the assignments are also sloppy because I have to spend time parsing the difference between the instructions on how to do the assignment and the actual requirements for the assignment. 
+
+3. Approximately how much time did you spend owrking on assignments?
+Upwards of 3-4 hours for each assignment. 
+
+4. Are you able to see how programs used in this class or learning bash would be helpful for your career?
+Nope. I don't really understand the sysadmin/networking side of this class at all, and the basic programming bits are really easy. It's like trying formulate a sentence but someone translated every noun into a language I don't know. I understand the structure of my sentences but I don't know what I'm actually talking about. I don't really see how this is particularly helpful for MY major, which is CSI, not CyberSec or DF.
